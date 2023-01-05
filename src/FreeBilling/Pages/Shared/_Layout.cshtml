@@ -1,0 +1,28 @@
+﻿@{
+  var year = DateTime.UtcNow.Year;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Free Billing</h1>
+      <partial name="_Nav" model="@User.Identity?.IsAuthenticated" />
+    </header>
+    <section>
+      @RenderBody()
+    </section>
+    <footer>
+      <div>&copy; @year, Free Billing Ltd.</div>
+    </footer>
+  </div>
+  @RenderSection("scripts", false)
+</body>
+</html>

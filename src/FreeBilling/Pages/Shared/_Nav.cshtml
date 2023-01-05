@@ -1,0 +1,11 @@
+﻿@model bool?
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    @if (Model == true)
+    {
+      <li><a href="/user">User Area</a></li>
+    }
+    <li><a href="/contact">Contact Us</a></li>
+  </ul>
+</nav>
