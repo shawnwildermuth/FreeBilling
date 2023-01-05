@@ -1,24 +1,29 @@
 ﻿@page
 @model FreeBilling.Pages.ContactPageModel
 @section scripts {
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.slim.min.js" integrity="sha512-jxwTCbLJmXPnV277CvAjAcWAjURzpephk0f0nO2lwsvcoDMqBdy1rh1jEwWWTabX1+Grdmj9GFAgtN22zrV0KQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js" integrity="sha512-xq+Vm8jC94ynOikewaQXMEkJIOBp7iArs3IhFWSWdRT3Pq8wFz46p+ZDFAR7kHnSFf+zUv52B3prRYnbDRdgog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.slim.min.js"
+  integrity="sha512-jxwTCbLJmXPnV277CvAjAcWAjURzpephk0f0nO2lwsvcoDMqBdy1rh1jEwWWTabX1+Grdmj9GFAgtN22zrV0KQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+<script defer
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"
+  integrity="sha512-xq+Vm8jC94ynOikewaQXMEkJIOBp7iArs3IhFWSWdRT3Pq8wFz46p+ZDFAR7kHnSFf+zUv52B3prRYnbDRdgog=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 }
 <vc:page-header page-name="Contact Form"></vc:page-header>
 <h3>Use the Contact Form Below:</h3>
-<form method="post" novalidate class="simple-form">
+<form method="post" novalidate class="flex flex-col mx-auto w-2/3 border border-solid rounded p-2">
   <label asp-for="Contact.Name">Name</label>
-  <input asp-for="Contact.Name" />
+  <input asp-for="Contact.Name" placeholder="Your Name Here" autofocus />
   <span asp-validation-for="Contact.Name"></span>
   <label asp-for="Contact.Email">E-Mail</label>
-  <input asp-for="Contact.Email" />
+  <input asp-for="Contact.Email" placeholder="e.g. shawn@aol.com" />
   <span asp-validation-for="Contact.Email"></span>
   <label asp-for="Contact.Subject">Subject</label>
-  <input asp-for="Contact.Subject" />
+  <input asp-for="Contact.Subject" placeholder="e.g. Billing Issue" />
   <span asp-validation-for="Contact.Subject"></span>
   <label asp-for="Contact.Message">Message</label>
-  <textarea asp-for="Contact.Message" rows="4"></textarea>
+  <textarea asp-for="Contact.Message" rows="4" placeholder="Your Message Here"></textarea>
   <span asp-validation-for="Contact.Message"></span>
   <button type="submit">Send</button>
   <div>@Model.Message</div>

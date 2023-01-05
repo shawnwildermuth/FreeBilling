@@ -10,16 +10,16 @@
   <title>Document</title>
   <link rel="stylesheet" href="/css/site.css" />
 </head>
-<body>
-  <div class="container">
-    <header>
+<body class="bg-slate-700">
+  <div class="bg-slate-100 container mx-auto min-h-screen">
+    <header class="flex justify-between bg-green-900 text-white">
       <h1>Free Billing</h1>
       <partial name="_Nav" model="@User.Identity?.IsAuthenticated" />
     </header>
-    <section>
+    <section class="p-4 bg-white">
       @RenderBody()
     </section>
-    <footer>
+    <footer class="bg-black text-white text-center py-2">
       <div>&copy; @year, Free Billing Ltd.</div>
     </footer>
   </div>

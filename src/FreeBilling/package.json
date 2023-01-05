@@ -1,0 +1,20 @@
+{
+  "name": "freebilling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "postcss.config.js",
+  "scripts": {
+    "dev": ".\\node_modules\\.bin\\run-p dev:*",
+    "dev:css": "tailwindcss -i ./styles/site.src.css -o ./wwwroot/css/site.css -w",
+    "dev:watch": "dotnet watch run --urls=http://localhost:8000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.20",
+    "tailwindcss": "^3.2.4",
+    "npm-run-all": "^4.1.5"
+  }
+}

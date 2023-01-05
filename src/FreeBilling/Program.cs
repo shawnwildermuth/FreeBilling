@@ -12,7 +12,7 @@ if (app.Environment.IsDevelopment())
   app.UseDeveloperExceptionPage();
 }
 
-// app.MapGet("/", () => "Hello World!");
+app.MapGet("/api/", () => "Hello World!");
 
 //app.UseDefaultFiles();
 app.UseStaticFiles();

@@ -4,6 +4,7 @@ namespace FreeBilling.Models;
 
 public class ContactModel
 {
+  
   [Required]
   public string? Name { get; set; }
   [Required]

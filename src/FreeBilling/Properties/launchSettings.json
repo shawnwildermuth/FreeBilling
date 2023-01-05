@@ -32,11 +32,12 @@
       "workingDirectory": "$(ProjectDir)",
       "hotReloadEnabled": true,
       "hotReloadProfile": "aspnetcore",
-      "commandLineArgs": "watch run",
+      "commandLineArgs": "watch run --urls=http://localhost:8000/",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:8000",
+      "applicationUrl": "http://localhost:8000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_WATCH_RESTART_ON_RUDE_EDIT": "1"
       }
     },
     "IIS Express": {
