@@ -73,7 +73,7 @@ public class BillingContext : DbContext
       new
       {
         Id = 2,
-        ProjectName = "SEO Help",
+        ProjectName = "Releasing New Product to Production",
         CustomerId = 1,
         StartDate = new DateTime(2022, 4, 24),
         EndDate = new DateTime(2022, 12, 15)
@@ -81,7 +81,7 @@ public class BillingContext : DbContext
       new
       {
         Id = 3,
-        ProjectName = "SEO Help",
+        ProjectName = "Perform Code Review",
         CustomerId = 2,
         StartDate = new DateTime(2023, 1, 5)
       });
