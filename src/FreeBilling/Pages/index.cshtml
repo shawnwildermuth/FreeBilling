@@ -1,4 +1,5 @@
 @page
+@model IndexPageModel
 @{
   //Layout = "_Layout";
 }
@@ -7,4 +8,13 @@
   and run your own server.
 </p>
 <p>Are you ready to do some Billing?</p>
+@foreach(var customer in Model.Customers)
+{
+  <div>@customer.CompanyName</div>
+  <div>@customer.Address?.AddressLine1</div>
+  <div>@customer.Address?.AddressLine2</div>
+  <div>@customer.Address?.AddressLine3</div>
+  <div>@customer.Address?.City, @customer.Address?.StateProvince  @customer.Address?.PostalCode</div>
+  <hr/>
+}
 
