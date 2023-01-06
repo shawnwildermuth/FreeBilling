@@ -148,8 +148,8 @@ namespace FreeBilling.Migrations
                 values: new object[,]
                 {
                     { 1, 1, null, "SEO Help", new DateTime(2023, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1, new DateTime(2022, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "SEO Help", new DateTime(2022, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 2, null, "SEO Help", new DateTime(2023, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 2, 1, new DateTime(2022, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Releasing New Product to Production", new DateTime(2022, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 2, null, "Perform Code Review", new DateTime(2023, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.CreateIndex(

@@ -4,7 +4,6 @@ using FreeBilling.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,11 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreeBilling.Migrations
 {
     [DbContext(typeof(BillingContext))]
-    [Migration("20230106101525_InitialDb")]
-    partial class InitialDb
+    partial class BillingContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,14 +205,14 @@ namespace FreeBilling.Migrations
                             Id = 2,
                             CustomerId = 1,
                             EndDate = new DateTime(2022, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProjectName = "SEO Help",
+                            ProjectName = "Releasing New Product to Production",
                             StartDate = new DateTime(2022, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             CustomerId = 2,
-                            ProjectName = "SEO Help",
+                            ProjectName = "Perform Code Review",
                             StartDate = new DateTime(2023, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
