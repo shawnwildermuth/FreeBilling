@@ -51,4 +51,18 @@ public class BillingRepository : IBillingRepository
       .OrderBy(p => p.ProjectName)
       .ToArrayAsync();
   }
+
+  public async Task<IEnumerable<Employee>> GetAllEmployees()
+  {
+    return await _context.Employees
+      .OrderBy(e => e.Name)
+      .ToArrayAsync();
+  }
+
+  public async Task<BillingUser?> GetUser(string username)
+  {
+    return await _context.BillingUsers
+      .Where(u => u.UserName == username)
+      .FirstOrDefaultAsync();
+  }
 }

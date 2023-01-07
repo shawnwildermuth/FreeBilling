@@ -8,7 +8,7 @@ public class Employee
   [Required]
   [MaxLength(255)]
   public string? Name { get; set; }
-  public string? UserId { get; set; }
+  public string? UserName { get; set; }
   [Required]
   public double BillingRate { get; set; }
 }
