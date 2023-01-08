@@ -85,81 +85,6 @@ namespace FreeBilling.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FreeBilling.Data.Entities.BillingUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsEmployee")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BillingUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "cc4d830d-d6b3-497b-8f65-a7d21f31f43d",
-                            Email = "shawn@wildermuth.com",
-                            EmailConfirmed = true,
-                            IsEmployee = true,
-                            LockoutEnabled = true,
-                            PasswordHash = "AQAAAAIAAYagAAAAEE4ArPTnT1x6C5S2uIVbsE60xzfeN+uQ9hW9zThRPwITu/hr21yb1FMJFC5xW9xRCw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "NI4FIFMF3MSLJFMT77QAGZM5QMN6W4P6",
-                            TwoFactorEnabled = false,
-                            UserName = "shawn@wildermuth.com"
-                        });
-                });
-
             modelBuilder.Entity("FreeBilling.Data.Entities.Customer", b =>
                 {
                     b.Property<int>("Id")
@@ -215,13 +140,52 @@ namespace FreeBilling.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
                     b.Property<double>("BillingRate")
                         .HasColumnType("float");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
@@ -234,8 +198,17 @@ namespace FreeBilling.Migrations
                         new
                         {
                             Id = 1,
+                            AccessFailedCount = 0,
                             BillingRate = 325.0,
+                            ConcurrencyStamp = "cc4d830d-d6b3-497b-8f65-a7d21f31f43d",
+                            Email = "shawn@wildermuth.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = true,
                             Name = "Shawn",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE4ArPTnT1x6C5S2uIVbsE60xzfeN+uQ9hW9zThRPwITu/hr21yb1FMJFC5xW9xRCw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "NI4FIFMF3MSLJFMT77QAGZM5QMN6W4P6",
+                            TwoFactorEnabled = false,
                             UserName = "shawn@wildermuth.com"
                         });
                 });

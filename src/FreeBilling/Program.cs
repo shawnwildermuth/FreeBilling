@@ -17,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
     opt.UseSqlServer(connString);
   });
 
-  builder.Services.AddIdentityCore<BillingUser>(cfg => cfg.User.RequireUniqueEmail = true)
+  builder.Services.AddIdentityCore<Employee>(cfg => cfg.User.RequireUniqueEmail = true)
      .AddEntityFrameworkStores<BillingContext>();
 
   builder.Services.AddTransient<IBillingRepository, BillingRepository>();

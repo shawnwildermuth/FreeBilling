@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FreeBilling.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDb : Migration
+    public partial class InitialAuth : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,12 +33,13 @@ namespace FreeBilling.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BillingUsers",
+                name: "Employees",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IsEmployee = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    BillingRate = table.Column<double>(type: "float", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -53,21 +54,6 @@ namespace FreeBilling.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
                     AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BillingUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Employees",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BillingRate = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -156,14 +142,9 @@ namespace FreeBilling.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "BillingUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsEmployee", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "cc4d830d-d6b3-497b-8f65-a7d21f31f43d", "shawn@wildermuth.com", true, true, true, null, null, null, "AQAAAAIAAYagAAAAEE4ArPTnT1x6C5S2uIVbsE60xzfeN+uQ9hW9zThRPwITu/hr21yb1FMJFC5xW9xRCw==", null, false, "NI4FIFMF3MSLJFMT77QAGZM5QMN6W4P6", false, "shawn@wildermuth.com" });
-
-            migrationBuilder.InsertData(
                 table: "Employees",
-                columns: new[] { "Id", "BillingRate", "Name", "UserName" },
-                values: new object[] { 1, 325.0, "Shawn", "shawn@wildermuth.com" });
+                columns: new[] { "Id", "AccessFailedCount", "BillingRate", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 1, 0, 325.0, "cc4d830d-d6b3-497b-8f65-a7d21f31f43d", "shawn@wildermuth.com", true, true, null, "Shawn", null, null, "AQAAAAIAAYagAAAAEE4ArPTnT1x6C5S2uIVbsE60xzfeN+uQ9hW9zThRPwITu/hr21yb1FMJFC5xW9xRCw==", null, false, "NI4FIFMF3MSLJFMT77QAGZM5QMN6W4P6", false, "shawn@wildermuth.com" });
 
             migrationBuilder.InsertData(
                 table: "Customers",
@@ -208,9 +189,6 @@ namespace FreeBilling.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "BillingUsers");
-
             migrationBuilder.DropTable(
                 name: "WorkTickets");
 

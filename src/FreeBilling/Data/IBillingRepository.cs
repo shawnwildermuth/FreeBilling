@@ -12,8 +12,9 @@ namespace FreeBilling.Data
     Task<Customer?> GetCustomer(int id);
 
     Task<IEnumerable<Project>> GetCustomerProjects(int custId);
+    Task<Project?> GetProject(int id);
 
     Task<IEnumerable<Employee>> GetAllEmployees();
-    Task<BillingUser?> GetUser(string username);
+    Task<Employee?> GetEmployee(string username);
   }
 }

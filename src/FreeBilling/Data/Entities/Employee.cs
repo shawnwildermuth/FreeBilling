@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace FreeBilling.Data.Entities;
 
-public class Employee
+public class Employee : IdentityUser<int>
 {
-  public int Id { get; set; }
   [Required]
   [MaxLength(255)]
   public string? Name { get; set; }
-  public string? UserName { get; set; }
   [Required]
   public double BillingRate { get; set; }
 }

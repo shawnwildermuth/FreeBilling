@@ -8,9 +8,9 @@ namespace FreeBilling.Pages;
 public class IndexPageModel : PageModel
 {
   private readonly IBillingRepository _repository;
-  private readonly UserManager<BillingUser> _usrManager;
+  private readonly UserManager<Employee> _usrManager;
 
-  public IndexPageModel(IBillingRepository repository, UserManager<BillingUser> usrManager)
+  public IndexPageModel(IBillingRepository repository, UserManager<Employee> usrManager)
 	{
     _repository = repository;
     _usrManager = usrManager;

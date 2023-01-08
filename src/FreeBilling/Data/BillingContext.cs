@@ -13,7 +13,6 @@ public class BillingContext : DbContext
   public DbSet<Address> Addresses => Set<Address>();
   public DbSet<Project> Projects => Set<Project>();
   public DbSet<WorkTicket> WorkTickets => Set<WorkTicket>();
-  public DbSet<BillingUser> BillingUsers => Set<BillingUser>();
 
 
   protected override void OnModelCreating(ModelBuilder bldr)
@@ -21,12 +20,19 @@ public class BillingContext : DbContext
     base.OnModelCreating(bldr);
 
     bldr.Entity<Employee>()
-      .HasData(new
+      .HasData(new Employee()
       {
         Id = 1,
         Name = "Shawn",
         BillingRate = 325.00,
-        UserName = "shawn@wildermuth.com"
+        UserName = "shawn@wildermuth.com",
+        Email = "shawn@wildermuth.com",
+        EmailConfirmed = true,
+        PasswordHash = "AQAAAAIAAYagAAAAEE4ArPTnT1x6C5S2uIVbsE60xzfeN+uQ9hW9zThRPwITu/hr21yb1FMJFC5xW9xRCw==",
+        SecurityStamp = "NI4FIFMF3MSLJFMT77QAGZM5QMN6W4P6",
+        ConcurrencyStamp = "cc4d830d-d6b3-497b-8f65-a7d21f31f43d",
+        LockoutEnabled = true,
+        AccessFailedCount = 0
       });
 
     bldr.Entity<Customer>()
@@ -90,20 +96,6 @@ public class BillingContext : DbContext
         StartDate = new DateTime(2023, 1, 5)
       });
 
-    bldr.Entity<BillingUser>()
-      .HasData(new BillingUser()
-      {
-        Id = 1,
-        UserName = "shawn@wildermuth.com",
-        Email = "shawn@wildermuth.com",
-        EmailConfirmed = true,
-        IsEmployee = true,
-        PasswordHash = "AQAAAAIAAYagAAAAEE4ArPTnT1x6C5S2uIVbsE60xzfeN+uQ9hW9zThRPwITu/hr21yb1FMJFC5xW9xRCw==",
-        SecurityStamp = "NI4FIFMF3MSLJFMT77QAGZM5QMN6W4P6",
-        ConcurrencyStamp = "cc4d830d-d6b3-497b-8f65-a7d21f31f43d",
-        LockoutEnabled = true,
-        AccessFailedCount = 0
-      }); ;
 
   }
 }

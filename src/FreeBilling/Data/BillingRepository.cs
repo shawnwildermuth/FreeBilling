@@ -59,10 +59,17 @@ public class BillingRepository : IBillingRepository
       .ToArrayAsync();
   }
 
-  public async Task<BillingUser?> GetUser(string username)
+  public async Task<Employee?> GetEmployee(string username)
   {
-    return await _context.BillingUsers
+    return await _context.Employees
       .Where(u => u.UserName == username)
+      .FirstOrDefaultAsync();
+  }
+
+  public async Task<Project?> GetProject(int id)
+  {
+    return await _context.Projects
+      .Where(p => p.Id == id)
       .FirstOrDefaultAsync();
   }
 }
