@@ -1,6 +1,7 @@
 using FreeBilling.Data;
 using FreeBilling.Data.Entities;
 using FreeBilling.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,8 @@ var builder = WebApplication.CreateBuilder(args);
 
   builder.Services.AddAuthentication()
     .AddJwtBearer();
+
+  //builder.Services.AddSpaStaticFiles(cfg => cfg.RootPath = "client") ;
 }
 
 var app = builder.Build();
@@ -50,12 +53,30 @@ var app = builder.Build();
   //});
 
   app.UseAuthorization();
+  app.UseRouting();
 
   //app.UseDefaultFiles();
   app.UseStaticFiles();
+  app.UseEndpoints(cfg =>
+  {
 
-  app.MapRazorPages();
-  app.MapControllers();
+    cfg.MapRazorPages();
+    cfg.MapControllers();
+
+    //app.UseSpaStaticFiles();
+
+  });
+
+  if (app.Environment.IsDevelopment())
+  {
+    app.UseSpa(cfg =>
+    {
+      cfg.Options.DevServerPort = 5000;
+      cfg.Options.SourcePath = "client";
+      cfg.UseProxyToSpaDevelopmentServer("http://localhost:5000");
+    });
+  }
+
 }
 
 app.Run();

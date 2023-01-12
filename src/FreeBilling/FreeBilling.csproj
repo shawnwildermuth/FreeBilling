@@ -18,8 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="package.json" />
-    <Content Remove="package-lock.json" />
+
     <Content Remove="node_modules\**" />
   </ItemGroup>
 
@@ -27,6 +26,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
