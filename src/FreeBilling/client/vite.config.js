@@ -5,7 +5,7 @@ import vue from "@vitejs/plugin-vue";
 export default defineConfig(({ command }) => {
   if (command === "serve") { // development
     return {
-      base: "/dist/",
+      base: "./",
       plugins: [vue()],
       server: {
         port: 5000,
@@ -13,7 +13,6 @@ export default defineConfig(({ command }) => {
     }
   } else { // build
     return {
-      base: "/dist/",
       plugins: [vue()],
       build: {
         outDir: "../wwwroot/client/",

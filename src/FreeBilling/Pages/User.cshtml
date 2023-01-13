@@ -3,6 +3,11 @@
 @{
 }
 @section scripts {
-  <script type="module" src="~/src/main.js"></script>
+  <environment names="Development">
+    <script type="module" src="http://localhost:5000/src/main.js"></script>
+  </environment>
+  <environment names="Production">
+    <script src="/client/main.js"></script>
+  </environment>
 }
 <div id="app"></div>

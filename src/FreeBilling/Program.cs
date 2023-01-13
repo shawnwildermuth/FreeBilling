@@ -27,8 +27,6 @@ var builder = WebApplication.CreateBuilder(args);
 
   builder.Services.AddAuthentication()
     .AddJwtBearer();
-
-  //builder.Services.AddSpaStaticFiles(cfg => cfg.RootPath = "client") ;
 }
 
 var app = builder.Build();
@@ -52,30 +50,15 @@ var app = builder.Build();
   //  return Results.BadRequest("Failed to add Customer");
   //});
 
-  app.UseAuthorization();
   app.UseRouting();
+  app.UseAuthorization();
 
   //app.UseDefaultFiles();
   app.UseStaticFiles();
-  app.UseEndpoints(cfg =>
-  {
 
-    cfg.MapRazorPages();
-    cfg.MapControllers();
+  app.MapRazorPages();
+  app.MapControllers();
 
-    //app.UseSpaStaticFiles();
-
-  });
-
-  if (app.Environment.IsDevelopment())
-  {
-    app.UseSpa(cfg =>
-    {
-      cfg.Options.DevServerPort = 5000;
-      cfg.Options.SourcePath = "client";
-      cfg.UseProxyToSpaDevelopmentServer("http://localhost:5000");
-    });
-  }
 
 }
 
