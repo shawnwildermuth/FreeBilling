@@ -59,7 +59,7 @@ var app = builder.Build();
   app.MapRazorPages();
   app.MapControllers();
 
-
+  app.MapFallbackToPage("/User");
 }
 
 app.Run();

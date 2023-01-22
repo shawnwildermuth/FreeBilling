@@ -1,34 +1,27 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
+import { fileURLToPath, URL } from 'node:url'
+
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command }) => {
-  if (command === "serve") { // development
-    return {
-      base: "./",
-      plugins: [vue()],
-      server: {
-        port: 5000,
-      }
-    }
-  } else { // build
-    return {
-      plugins: [vue()],
-      build: {
-        outDir: "../wwwroot/client/",
-        emptyOutDir: true,
-        rollupOptions: {
-          output: {
-            entryFileNames: "client.js",
-            chunkFileNames: "[name].js"
-          }
-        }
-      },
-      css: {
-        postcss: {
-          "postcss-plugin": false,
-        },
-      },
+export default defineConfig({
+  plugins: [vue()],
+  base: "/user",
+  server: {
+    port: 5000,
+  },
+  build: {
+    outDir: "../wwwroot/client/",
+    emptyOutDir: true
+  },
+  css: {
+    postcss: {
+      "postcss-plugin": false,
+    },
+  },
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   }
-});
+})

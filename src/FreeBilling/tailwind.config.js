@@ -2,7 +2,8 @@
 module.exports = {
   content: [ 
     "./Pages/**/*.{js,html,cshtml}",
-    "./wwwroot/**/*.html"
+    "./wwwroot/**/*.html",
+    "./Client/src/**/*.{js,html,vue}"
   ],
   theme: {
     extend: {},
