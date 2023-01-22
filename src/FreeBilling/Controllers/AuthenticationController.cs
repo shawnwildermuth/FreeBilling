@@ -89,7 +89,8 @@ public class AuthenticationController
             return Results.Created("/auth/signin", new SignInResultModel()
             {
               Token = tokenString,
-              Expiration = token.ValidTo
+              Expiration = token.ValidTo,
+              Username = user.UserName!
             });
           }
 

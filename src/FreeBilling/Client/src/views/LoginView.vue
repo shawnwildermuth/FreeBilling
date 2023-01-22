@@ -1,10 +1,12 @@
 <script setup>
   import { reactive, ref } from "vue";
   import store from "../store";
+  import axios from "axios";
+  import router from "../router";
 
   const loginInfo = reactive({
-    username: "",
-    password: ""
+    username: "shawn@wildermuth.com",
+    password: "P@ssw0rd!"
   })
 
   const message = ref("");
@@ -16,22 +18,16 @@
     message.value = "";
     error.value = "";
 
-    const response = await fetch("/api/auth/signin", {
-      method: "POST",
-      //headers: {
-      //  'Content-Type': 'application/json'
-      //},
-      body: JSON.stringify(loginInfo)
-    });
-
-    const body = await response.json();
+    const response = await axios.post("/api/auth/signin", loginInfo);
 
     if (response.status === 201) { // Created
-      store.auth.token = body.token;
-      store.auth.expiration = body.expiration;
+      store.auth.token = response.data.token;
+      store.auth.expiration = response.data.expiration;
+      store.auth.username = response.data.username;
+      router.push("/");
     }
     else {
-      error.value = body;
+      error.value = response.data;
     }
   }
 </script>

@@ -10,15 +10,16 @@ export default defineConfig({
   server: {
     port: 5000,
   },
+  root: "./client",
   build: {
-    outDir: "../wwwroot/client/",
+    outDir: "./wwwroot/client/",
     emptyOutDir: true
   },
-  css: {
-    postcss: {
-      "postcss-plugin": false,
-    },
-  },
+  //css: {
+  //  postcss: {
+  //    "postcss-plugin": false,
+  //  },
+  //},
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
