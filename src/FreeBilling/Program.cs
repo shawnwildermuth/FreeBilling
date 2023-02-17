@@ -1,16 +1,20 @@
+using FluentValidation;
 using FreeBilling.Data;
 using FreeBilling.Data.Entities;
 using FreeBilling.Services;
+using FreeBilling.Validators;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using WilderMinds.MinimalApiDiscovery;
 
 var builder = WebApplication.CreateBuilder(args);
 
 { // services
   builder.Services.AddRazorPages();
-  builder.Services.AddControllers();
   builder.Services.AddTransient<IEmailService, FakeEmailService>();
+  builder.Services.AddApis();
+  builder.Services.AddValidatorsFromAssemblyContaining<IValidator>();
 
   builder.Services.AddDbContext<BillingContext>(opt =>
   {
@@ -26,6 +30,7 @@ var builder = WebApplication.CreateBuilder(args);
   builder.Services.AddAutoMapper(cfg => cfg.AddProfile<BillingMaps>());
 
   builder.Services.AddAuthentication()
+    //.AddCookie()
     .AddJwtBearer();
 }
 
@@ -57,9 +62,10 @@ var app = builder.Build();
   app.UseStaticFiles();
 
   app.MapRazorPages();
-  app.MapControllers();
+  app.MapApis();
 
-  app.MapFallbackToPage("/User");
+  // Only fallback on the user page
+  app.MapFallbackToPage("/User/{*path}", "/User"); 
 }
 
 app.Run();

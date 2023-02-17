@@ -4,52 +4,40 @@ using System.Text;
 using AutoMapper;
 using FreeBilling.Data;
 using FreeBilling.Data.Entities;
+using FreeBilling.Filters;
 using FreeBilling.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using WilderMinds.MinimalApiDiscovery;
 
 namespace FreeBilling.Controllers;
 
-[Route("api/auth")]
-[ApiController]
-[Authorize]
-public class AuthenticationController
+public class AuthenticationApi : IApi
 {
-  private readonly IBillingRepository _repository;
-  private readonly IMapper _mapper;
-  private readonly ILogger<AuthenticationController> _logger;
-  private readonly UserManager<Employee> _userManager;
-  private readonly IConfiguration _config;
-
-  public AuthenticationController(IBillingRepository repository,
-    IMapper mapper,
-    ILogger<AuthenticationController> logger,
-    UserManager<Employee> userManager,
-    IConfiguration config)
+  public void Register(WebApplication app)
   {
-    _repository = repository;
-    _mapper = mapper;
-    _logger = logger;
-    _userManager = userManager;
-    _config = config;
+    app.MapPost("/api/auth/signin", Signin)
+      .AddModelValidation<SignInModel>();
   }
 
-  [AllowAnonymous]
-  [HttpPost("signin")]
-  public async Task<IResult> Signin(SignInModel model)
+  public async Task<IResult> Signin(IBillingRepository repository,
+    ILogger<AuthenticationApi> logger,
+    UserManager<Employee> userManager,
+    IConfiguration config,
+    SignInModel model)
   {
     try
     {
-      var user = await _repository.GetEmployee(model.Username);
+      var user = await repository.GetEmployee(model.Username);
       if (user is not null)
       {
-        var result = await _userManager.CheckPasswordAsync(user, model.Password);
+        var result = await userManager.CheckPasswordAsync(user, model.Password);
         if (result)
         {
 
-          var bearer = _config.GetSection("Authentication:Schemes:Bearer");
+          var bearer = config.GetSection("Authentication:Schemes:Bearer");
           if (bearer is not null)
           {
             var uniqueKey = bearer.GetSection("SigningKeys").Get<SymmetricSecurityKey[]>()?.First().Key;
@@ -99,7 +87,7 @@ public class AuthenticationController
     }
     catch (Exception ex)
     {
-      _logger.LogWarning($"Failed to sign in: {ex}");
+      logger.LogWarning($"Failed to sign in: {ex}");
     }
 
     return Results.BadRequest("Bad username or password");

@@ -1,5 +1,6 @@
 using FreeBilling.Models;
 using FreeBilling.Services;
+using FreeBilling.Validators;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,10 +9,12 @@ namespace FreeBilling.Pages;
 public class ContactPageModel : PageModel
 {
   private readonly IEmailService _emailService;
+  private readonly ContactModelValidator _contactValidator;
 
-  public ContactPageModel(IEmailService emailService)
+  public ContactPageModel(IEmailService emailService, ContactModelValidator contactValidator)
   {
     _emailService = emailService;
+    _contactValidator = contactValidator;
   }
 
   [BindProperty]
@@ -26,7 +29,7 @@ public class ContactPageModel : PageModel
 
   public async void OnPost()
   {
-    if (ModelState.IsValid && await _emailService.SendEmail(Contact))
+    if (_contactValidator.Validate(Contact).IsValid && await _emailService.SendEmail(Contact))
     {
       Message = $"Message Sent";
       ModelState.Clear();

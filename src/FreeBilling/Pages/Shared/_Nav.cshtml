@@ -10,5 +10,15 @@
     <li>
       <a href="/contact">Contact Us</a>
     </li>
+    <li>
+      @if (Model == true)
+      {
+        <a href="/logout">Logout</a>
+      }
+      else
+      {
+        <a href="/login">Login</a>
+      }
+    </li>
   </ul>
 </nav>

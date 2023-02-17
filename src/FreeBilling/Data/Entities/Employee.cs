@@ -5,9 +5,6 @@ namespace FreeBilling.Data.Entities;
 
 public class Employee : IdentityUser<int>
 {
-  [Required]
-  [MaxLength(255)]
-  public string? Name { get; set; }
-  [Required]
+  public string Name { get; set; } = "";
   public double BillingRate { get; set; }
 }
