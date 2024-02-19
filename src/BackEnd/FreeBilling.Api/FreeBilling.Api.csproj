@@ -41,4 +41,8 @@
     <Folder Include="Client\src\store\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FreeBilling.Core\FreeBilling.Core.csproj" />
+  </ItemGroup>
+
 </Project>
