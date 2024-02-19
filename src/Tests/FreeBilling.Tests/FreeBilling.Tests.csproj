@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FreeBilling.Core\FreeBilling.Core.csproj" />
+    <ProjectReference Include="..\..\BackEnd\FreeBilling.Core\FreeBilling.Core.csproj" />
   </ItemGroup>
 
 </Project>
