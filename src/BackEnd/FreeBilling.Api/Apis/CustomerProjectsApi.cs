@@ -9,7 +9,7 @@ namespace FreeBilling.Controllers;
 public class CustomerProjectsApi : IApi
 {
 
-  public void Register(WebApplication app)
+  public void Register(IEndpointRouteBuilder app)
   {
     app.MapGet("api/customers/{custId:int}/projects/", GetProjects)
       .Produces(200)

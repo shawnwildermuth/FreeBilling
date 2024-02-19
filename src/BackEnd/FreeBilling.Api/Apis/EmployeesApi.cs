@@ -10,11 +10,10 @@ namespace FreeBilling.Controllers;
 public class EmployeesApi : IApi
 {
 
-  public void Register(WebApplication app)
+  public void Register(IEndpointRouteBuilder app)
   {
     app.MapGet("/api/employees", Get)
-      .Produces(200)
-      .RequireAuthorization();
+      .Produces(200);
   }
 
   public async Task<IResult> Get(IBillingRepository repo)

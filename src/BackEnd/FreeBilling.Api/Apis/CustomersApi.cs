@@ -1,19 +1,17 @@
 using AutoMapper;
 using FreeBilling.Data;
 using FreeBilling.Data.Entities;
-using FreeBilling.Filters;
-using Microsoft.AspNetCore.Mvc;
 using WilderMinds.MinimalApiDiscovery;
+using WilderMinds.MinimalApis.FluentValidation;
 
 namespace FreeBilling.Controllers;
 
 public class CustomersApi : IApi
 {
 
-  public void Register(WebApplication app)
+  public void Register(IEndpointRouteBuilder app)
   {
-    var group = app.MapGroup("/api/customers")
-      .RequireAuthorization();
+    var group = app.MapGroup("/api/customers");
 
     group.MapGet("", GetCustomers)
       .Produces(200);
@@ -22,11 +20,11 @@ public class CustomersApi : IApi
       .Produces(200);
 
     group.MapPost("", Post)
-      .AddModelValidation<Customer>()
+      .Validate<Customer>()
       .Produces(201);
 
     group.MapPut("{id:int}", Put)
-      .AddModelValidation<Customer>()
+      .Validate<Customer>()
       .Produces(200);
 
     group.MapDelete("{id:int}", Delete)

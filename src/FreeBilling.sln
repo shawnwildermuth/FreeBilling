@@ -27,6 +27,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBilling.Host", "Host\FreeBilling.Host\FreeBilling.Host.csproj", "{DDA39F01-B044-4E86-B865-AD4E99F7F7EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{B25E0503-118F-4C29-B4CE-C91BA9B98227}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,10 @@ Global
 		{92DB35CE-5FCE-4A8A-B441-2E209C38F148}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92DB35CE-5FCE-4A8A-B441-2E209C38F148}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92DB35CE-5FCE-4A8A-B441-2E209C38F148}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDA39F01-B044-4E86-B865-AD4E99F7F7EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDA39F01-B044-4E86-B865-AD4E99F7F7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDA39F01-B044-4E86-B865-AD4E99F7F7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDA39F01-B044-4E86-B865-AD4E99F7F7EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +80,7 @@ Global
 		{28CF5904-FAB7-47B9-A3F5-C76FDA02296D} = {EB47F3A7-F8F5-497E-9F09-9DE2FB742DA9}
 		{E012BA66-7191-4A99-ABA1-8A656B75B7AD} = {EB47F3A7-F8F5-497E-9F09-9DE2FB742DA9}
 		{92DB35CE-5FCE-4A8A-B441-2E209C38F148} = {1941A8DE-CDA9-4E49-9CF3-65358C945210}
+		{DDA39F01-B044-4E86-B865-AD4E99F7F7EE} = {B25E0503-118F-4C29-B4CE-C91BA9B98227}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EA612CC5-7290-4BAB-B709-DF278AE22DC7}
