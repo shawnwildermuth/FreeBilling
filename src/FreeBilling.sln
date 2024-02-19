@@ -9,7 +9,7 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "freebilling.ui", "FrontEnd\
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "freebilling.dashboard", "FrontEnd\freebilling.dashboard\freebilling.dashboard.esproj", "{B75F05CE-EEF8-470F-A028-1B3ED7A4F5A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBilling.Functions", "BackEnd\FreeBilling.Functions\FreeBilling.Functions.csproj", "{28CF5904-FAB7-47B9-A3F5-C76FDA02296D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeBilling.Functions", "BackEnd\FreeBilling.Functions\FreeBilling.Functions.csproj", "{28CF5904-FAB7-47B9-A3F5-C76FDA02296D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{EB47F3A7-F8F5-497E-9F09-9DE2FB742DA9}"
 EndProject
@@ -17,9 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{B4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1941A8DE-CDA9-4E49-9CF3-65358C945210}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBilling.Core", "BackEnd\FreeBilling.Core\FreeBilling.Core.csproj", "{E012BA66-7191-4A99-ABA1-8A656B75B7AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeBilling.Core", "BackEnd\FreeBilling.Core\FreeBilling.Core.csproj", "{E012BA66-7191-4A99-ABA1-8A656B75B7AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeBilling.Tests", "Tests\FreeBilling.Tests\FreeBilling.Tests.csproj", "{92DB35CE-5FCE-4A8A-B441-2E209C38F148}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeBilling.Tests", "Tests\FreeBilling.Tests\FreeBilling.Tests.csproj", "{92DB35CE-5FCE-4A8A-B441-2E209C38F148}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F16F65B-A52D-410E-8997-C3266D5C436F}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\readme.md = ..\readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
