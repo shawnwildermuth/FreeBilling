@@ -17,5 +17,6 @@ The system will use:
 - Azure Entra ID
 - Azure Service App (Static Web App)
 - Azure Serivce App (Container)
+- .NET Aspire
 
 As the project continues, we'll be adding more documentation.
