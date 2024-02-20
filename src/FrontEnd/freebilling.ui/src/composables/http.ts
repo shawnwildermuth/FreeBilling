@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { useVars } from "./vars";
 
 const vars = useVars();
 

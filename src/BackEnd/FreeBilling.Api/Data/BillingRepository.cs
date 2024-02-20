@@ -62,7 +62,7 @@ public class BillingRepository : IBillingRepository
   public async Task<Employee?> GetEmployee(string username)
   {
     return await _context.Employees
-      .Where(u => u.UserName == username)
+      .Where(u => u.UserId == username)
       .FirstOrDefaultAsync();
   }
 

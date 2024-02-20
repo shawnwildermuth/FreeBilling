@@ -1,16 +1,12 @@
-<script setup lang="ts">
-import { useCustomersStore } from "@/stores/customers";
-
-const store = useCustomersStore();
-
-onMounted(async () => await store.load());
-
-</script>
-
 <template>
-  <main>
-    <div v-for="c in store.customers">
-      {{ c.companyName }}
+  <div class="hero min-h-screen bg-base-200">
+    <div class="hero-content text-center flex-col">
+      <h1>Welcome to Free Billing</h1>
+      <p class="text-lg text-base-content">FreeBilling is an open source project exemplar to show how to use a
+        number
+        of related technologies. </p>
+      <router-link to="/customers" class="btn btn-primary">Get
+        Started</router-link>
     </div>
-  </main>
+  </div>
 </template>
