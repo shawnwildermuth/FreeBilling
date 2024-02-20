@@ -14,28 +14,67 @@ export const useState = defineStore('state', () => {
   const employee = ref<Employee>();
   const projects = ref<Project>();
   const error = ref("");
-  
+  const isBusy = ref(false);
+
+  function startRequest() {
+    isBusy.value = true;
+    error.value = "";
+  }
+
+  function endRequest() {
+    isBusy.value = false;
+  }
+
   async function loadCustomers() {
-    const result = await http.get<Customer[]>("/api/customers");
-    if (result.data) {
-      customers.splice(0, customers.length, ...result.data);
+    try {
+      startRequest()
+      const result = await http.get<Customer[]>("/api/customers");
+      if (result.data) {
+        customers.splice(0, customers.length, ...result.data);
+      }
+    } finally {
+      endRequest();
     }
   }
 
-  async function loadCustomer(id: number) {
-    const result = await http.get<Customer>(`/api/customers/${id}`);
+  async function getCustomer(id: number) {
+    // TODO, get from cached customers
+    try {
+      startRequest()
+      const result = await http.get<Customer>(`/api/customers/${id}`);
+      if (result.data) {
+        return result.data;
+      } else {
+        error.value = "Could not find customer";
+        return undefined;
+      }
+    } finally {
+      endRequest();
+    }
+  }
+
+async function getProjects(id: number) {
+  try {
+    startRequest()
+    const result = await http.get<Project[]>(`/api/customers/${id}/projects`);
     if (result.data) {
       return result.data;
     } else {
-      error.value = "Could not find customer";
+      error.value = "Could not find projects";
       return undefined;
     }
+  } finally {
+    endRequest();
   }
 
-  return { 
-    customers, 
+}
+
+  return {
+    customers,
     error,
+    isBusy,
     loadCustomers,
-    loadCustomer 
+    getCustomer,
+    getProjects
   };
 })

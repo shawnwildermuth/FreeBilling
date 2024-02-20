@@ -8,6 +8,10 @@ const state = useState();
 
 <template>
   <div data-theme="night">
+    <div v-if="state.isBusy"
+         class="absolute w-full h-screen z-50 flex justify-center items-center bg-gray-800/75">
+      <span class="loading loading-ring loading-lg"></span>
+    </div>
     <div class="flex flex-row">
       <div class="flex-grow-0 p-2 h-screen  bg-base-200 min-w-60">
         <h1 class="hover:text-gray-200">
@@ -21,7 +25,7 @@ const state = useState();
         </ul>
       </div>
       <div class="flex-grow p-2">
-        <div role="alert" class="alert shadow-lg" v-if="state.error">
+        <div role="alert" class="alert shadow-sm" v-if="state.error">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             class="stroke-info shrink-0 w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -36,6 +40,7 @@ const state = useState();
         </div>
         <RouterView />
       </div>
+    </div>
   </div>
-</div></template>
+</template>
 
