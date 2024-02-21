@@ -1,4 +1,6 @@
+using FreeBilling.Api.Models;
 using FreeBilling.Data.Entities;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 namespace FreeBilling.Data;
@@ -71,5 +73,38 @@ public class BillingRepository : IBillingRepository
     return await _context.Projects
       .Where(p => p.Id == id)
       .FirstOrDefaultAsync();
+  }
+
+  public async Task<CustomerDetailsModel?> GetCustomerDetails(int id)
+  {
+    var customer = await _context.Customers
+      .Include(c => c.Address)
+      .Where(c => c.Id == id)
+      .FirstOrDefaultAsync();
+
+    if (customer is null) return null;
+
+    var details = customer.Adapt<CustomerDetailsModel>();
+
+    var projects = await GetCustomerProjects(id);
+
+    if (projects.Any())
+    {
+      details.Projects = projects.Adapt<ICollection<ProjectModel>>();
+      
+      // Calculate Totals
+      foreach (var project in details.Projects)
+      {
+        project.ProjectTotal = await _context.WorkTickets
+          .Where(t => t.Project != null && t.Project.Id == project.Id)
+          .SumAsync(t => t.Hours * t.BillingRate);
+      }
+
+      details.TotalBalance = details.Projects
+        .Sum(p => p.ProjectTotal);
+    }
+
+    return details;
+
   }
 }

@@ -1,20 +1,17 @@
 <script setup lang="ts">
-import type { Customer } from '@/models/customer';
-import type { Project } from '@/models/project';
+import type { CustomerDetails } from '@/models/CustomerDetails';
 import { useState } from '@/stores';
 import { onMounted, reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { money, shortDate } from "@/filters";
 
 const router = useRouter();
 const route = useRoute();
 const state = useState();
-const customer = ref<Customer>();
-const projects = reactive(new Array<Project>());
+const customer = ref<CustomerDetails>();
 
 onMounted(async () => {
-  customer.value = await state.getCustomer(Number(route.params.id));
-  const data = await state.getProjects(Number(route.params.id));
-  if (data) projects.splice(0, projects.length, ...data);
+  customer.value = await state.getCustomerDetails(Number(route.params.id));
 });
 
 </script>
@@ -25,20 +22,45 @@ onMounted(async () => {
         @click.prevent="router.back()"><icon-back /> Back</button>
       <div>
         <router-link class="btn btn-sm btn-secondary"
-        to="/customer/edit/{{ customer?.id }}"><icon-edit /> Edit</router-link>
+          to="/customer/edit/{{ customer?.id }}"><icon-edit /> Edit</router-link>
       </div>
     </div>
     <div v-if="customer">
       <h2>{{ customer?.companyName }}</h2>
+      <p>Customer Balance: {{ money(customer?.totalBalance) }}</p>
       <div v-if="customer?.address" class="text-lg p-1 ml-2 border-gray-500/50">
         <customer-address :address="customer?.address" />
       </div>
     </div>
     <div>
       <h3>Projects</h3>
-      <div v-for="p in projects">
-        {{ p.projectName }}
-      </div>
+      <table class="table table-zebra m-1 border border-slate-600 rounded">
+        <thead class="bg-slate-800 text-lg text-slate-200">
+          <tr>
+            <td>Name</td>
+            <td>Start Date</td>
+            <td>End Date</td>
+            <td>Project Total</td>
+            <td class="w-60"></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="p in customer?.projects">
+            <td>{{ p.projectName }}</td>
+            <td>{{ shortDate(p?.startDate) }}</td>
+            <td>{{ shortDate(p?.endDate) }}</td>
+            <td>{{ money(p.projectTotal) }}</td>
+            <td>
+              <div class="join">
+                <button class="btn btn-xs btn-primary join-item"><icon-edit class="w-4 h-4" /> Edit</button>
+                <button class="btn btn-xs btn-secondary join-item"><icon-plus class="w-4 h-4"/> Ticket</button>
+                <button class="btn btn-xs btn-warning join-item"><icon-post class="w-4 h-4"/> End</button>
+              </div>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>

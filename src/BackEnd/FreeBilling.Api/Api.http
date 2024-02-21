@@ -1,3 +1,11 @@
 
 
 GET {{$projectUrl}}/api/customers
+
+###
+
+GET {{$projectUrl}}/api/customers/2/details
+
+###
+
+GET {{$projectUrl}}/api/tickets

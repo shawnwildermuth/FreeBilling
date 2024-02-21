@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
-import { type Customer } from "@/models/customer";
+import { type Customer } from "@/models/Customer";
 import type { Ticket } from '@/models/Ticket';
-import type { Employee } from '@/models/employee';
-import type { Project } from '@/models/project';
+import type { Employee } from '@/models/Employee';
+import type { Project } from '@/models/Project';
 import { useHttp } from '@/composables/http';
 import { reactive, ref } from 'vue';
+import type { CustomerDetails } from '@/models/CustomerDetails';
 
 const http = useHttp();
 
@@ -53,10 +54,10 @@ export const useState = defineStore('state', () => {
     }
   }
 
-async function getProjects(id: number) {
+async function getCustomerDetails(id: number) {
   try {
     startRequest()
-    const result = await http.get<Project[]>(`/api/customers/${id}/projects`);
+    const result = await http.get<CustomerDetails>(`/api/customers/${id}/details`);
     if (result.data) {
       return result.data;
     } else {
@@ -75,6 +76,6 @@ async function getProjects(id: number) {
     isBusy,
     loadCustomers,
     getCustomer,
-    getProjects
+    getCustomerDetails
   };
 })

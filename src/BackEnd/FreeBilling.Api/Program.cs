@@ -18,8 +18,6 @@ builder.Services.AddDbContext<BillingContext>(opt =>
 
 builder.Services.AddTransient<IBillingRepository, BillingRepository>();
 
-builder.Services.AddAutoMapper(cfg => cfg.AddProfile<BillingMaps>());
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

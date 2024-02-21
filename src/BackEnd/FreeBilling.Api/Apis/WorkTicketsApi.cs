@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using FreeBilling.Data;
+﻿using FreeBilling.Data;
 using FreeBilling.Data.Entities;
 using FreeBilling.Models;
+using Mapster;
 using WilderMinds.MinimalApiDiscovery;
 using WilderMinds.MinimalApis.FluentValidation;
 
@@ -17,14 +17,13 @@ public class WorkTicketsApi : IApi
   }
 
   public async Task<IResult> Post(HttpContext ctx, 
-    IMapper mapper,
     IBillingRepository repository,
     ILogger<WorkTicketsApi> logger,
     WorkTicketModel model)
   {
     try
     {
-      var entity = mapper.Map<WorkTicket>(model);
+      var entity = model.Adapt<WorkTicket>();
       //entity.Employee = currentUser;
 
       var project = await repository.GetProject(model.ProjectId);
@@ -33,7 +32,7 @@ public class WorkTicketsApi : IApi
       repository.Add(entity);
       if (await repository.SaveChanges())
       {
-        return Results.Created($"/api/tickets/{model.Id}", mapper.Map<WorkTicketModel>(entity));
+        return Results.Created($"/api/tickets/{model.Id}", entity.Adapt<WorkTicketModel>());
       }
     } 
     catch (Exception ex)

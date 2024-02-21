@@ -1,5 +1,5 @@
-import { type Employee } from "./employee";
-import { type Project } from "./project";
+import { type Employee } from "./Employee";
+import { type Project } from "./Project";
 
 export interface Ticket {
   id: number;

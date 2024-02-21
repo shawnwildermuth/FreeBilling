@@ -1,4 +1,5 @@
-﻿using FreeBilling.Data.Entities;
+﻿using FreeBilling.Api.Models;
+using FreeBilling.Data.Entities;
 
 namespace FreeBilling.Data
 {
@@ -10,6 +11,7 @@ namespace FreeBilling.Data
 
     Task<IEnumerable<Customer>> GetAllCustomers();
     Task<Customer?> GetCustomer(int id);
+    Task<CustomerDetailsModel?> GetCustomerDetails(int id);
 
     Task<IEnumerable<Project>> GetCustomerProjects(int custId);
     Task<Project?> GetProject(int id);

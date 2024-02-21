@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FreeBilling.Data;
+﻿using FreeBilling.Data;
 using FreeBilling.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

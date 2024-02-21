@@ -1,4 +1,4 @@
-import type { Address } from "./address.ts";
+import type { Address } from "./Address.js";
 
 export interface Customer {
   id: number;

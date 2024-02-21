@@ -1,4 +1,4 @@
-import { type Customer } from "./customer";
+import { type Customer } from "./Customer";
 
 export interface Project {
   id: number;

@@ -1,16 +1,11 @@
-using AutoMapper;
 using FreeBilling.Data.Entities;
 using FreeBilling.Models;
 
 namespace FreeBilling.Data;
 
-public class BillingMaps : Profile
+public class BillingMaps 
 {
 	public BillingMaps()
 	{
-		CreateMap<Customer, Customer>();
-		CreateMap<Address, Address>();
-		CreateMap<WorkTicket, WorkTicketModel>()
-			.ReverseMap();
 	}
 }

@@ -1,6 +1,6 @@
-using AutoMapper;
 using FreeBilling.Data;
 using FreeBilling.Data.Entities;
+using Mapster;
 using WilderMinds.MinimalApiDiscovery;
 using WilderMinds.MinimalApis.FluentValidation;
 
@@ -17,6 +17,9 @@ public class CustomersApi : IApi
       .Produces(200);
 
     group.MapGet("{id:int}", GetCustomer)
+      .Produces(200);
+
+    group.MapGet("{id:int}/details", GetCustomerDetails)
       .Produces(200);
 
     group.MapPost("", Post)
@@ -43,6 +46,14 @@ public class CustomersApi : IApi
     return Results.Ok(customer);
   }
 
+  private async Task<IResult> GetCustomerDetails(IBillingRepository repo, int id)
+  {
+    var customer = await repo.GetCustomerDetails(id);
+    if (customer is null) return Results.NotFound("Customer Not Found");
+    return Results.Ok(customer);
+  }
+
+
 
   public async Task<IResult> Post(IBillingRepository repo, 
     ILogger<CustomersApi> logger,
@@ -64,7 +75,6 @@ public class CustomersApi : IApi
   }
 
   public async Task<IResult> Put(IBillingRepository repo,
-    IMapper mapper,
     ILogger<CustomersApi> logger,
     int id, 
     Customer model)
@@ -75,7 +85,7 @@ public class CustomersApi : IApi
       if (oldCustomer is null) return Results.NotFound("Customer Not Found");
 
       // Copy new values to connected entity
-      mapper.Map(model, oldCustomer);
+      model.Adapt(oldCustomer);
 
       if (await repo.SaveChanges())
       {
