@@ -10,7 +10,10 @@ onMounted(async () => await state.loadCustomers());
 
 <template>
   <div>
+    <div class="flex justify-between">
     <h2>Customers</h2>
+    <router-link to="/customers/editor/new" class="btn btn-success"><IconPlus /> New Cusotmer</router-link>
+  </div>
     <div class="p-1">
       <table class="table text-lg table-zebra border border-base-content/25">
         <thead class="text-lg">
@@ -28,6 +31,7 @@ onMounted(async () => await state.loadCustomers());
             <td class="text-blue-400"><a href="tel:{{c.phoneNumber}}">{{ c.phoneNumber }}</a></td>
             <td>
               <div class="join">
+                <router-link :to="'/customers/editor/' + c.id" class="btn btn-sm btn-primary join-item">Edit</router-link>
                 <router-link :to="'/customers/' + c.id" class="btn btn-sm btn-info join-item">Details</router-link>
                 <router-link :to="'/customers/tickets/' + c.id" class="btn btn-sm btn-success join-item">Tickets</router-link>
               </div>

@@ -6,6 +6,7 @@ import type { Project } from '@/models/Project';
 import { useHttp } from '@/composables/http';
 import { reactive, ref } from 'vue';
 import type { CustomerDetails } from '@/models/CustomerDetails';
+import type { AxiosError } from 'axios';
 
 const http = useHttp();
 
@@ -33,6 +34,9 @@ export const useState = defineStore('state', () => {
       if (result.data) {
         customers.splice(0, customers.length, ...result.data);
       }
+    } catch (e) {
+      const httpError = e as AxiosError;
+      error.value = httpError.message;
     } finally {
       endRequest();
     }
@@ -64,7 +68,10 @@ async function getCustomerDetails(id: number) {
       error.value = "Could not find projects";
       return undefined;
     }
-  } finally {
+  } catch (e) {
+    const httpError = e as AxiosError;
+    error.value = httpError.message;
+} finally {
     endRequest();
   }
 

@@ -34,14 +34,14 @@ onMounted(async () => {
     </div>
     <div>
       <h3>Projects</h3>
-      <table class="table table-zebra m-1 border border-slate-600 rounded">
+      <table class="table table-zebra m-1 ">
         <thead class="bg-slate-800 text-lg text-slate-200">
           <tr>
             <td>Name</td>
             <td>Start Date</td>
             <td>End Date</td>
             <td>Project Total</td>
-            <td class="w-60"></td>
+            <td class="w-72"></td>
           </tr>
         </thead>
         <tbody>
@@ -52,9 +52,9 @@ onMounted(async () => {
             <td>{{ money(p.projectTotal) }}</td>
             <td>
               <div class="join">
-                <button class="btn btn-xs btn-primary join-item"><icon-edit class="w-4 h-4" /> Edit</button>
-                <button class="btn btn-xs btn-secondary join-item"><icon-plus class="w-4 h-4"/> Ticket</button>
-                <button class="btn btn-xs btn-warning join-item"><icon-post class="w-4 h-4"/> End</button>
+                <button class="btn btn-sm btn-primary join-item"><icon-edit class="w-4 h-4" /> Edit</button>
+                <button class="btn btn-sm btn-secondary join-item"><icon-plus class="w-4 h-4"/> Ticket</button>
+                <button class="btn btn-sm btn-warning join-item"><icon-post class="w-4 h-4"/> End</button>
               </div>
 
             </td>

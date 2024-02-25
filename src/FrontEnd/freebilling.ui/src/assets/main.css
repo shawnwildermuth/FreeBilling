@@ -29,6 +29,11 @@
 
 }
 
-@layer components {
-
+@layer utilities {
+  .theInput {
+    @apply input input-bordered w-full;
+  }
+  .theLabel {
+    @apply form-control w-full;
+  }
 }
