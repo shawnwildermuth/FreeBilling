@@ -16,3 +16,5 @@ export const CustomerSchema = z.object({
   contact: z.nullable(z.string()),
   phoneNumbe: z.nullable(z.string())
 });
+
+export type CustomerErrors = z.inferFormattedError<typeof CustomerSchema>;

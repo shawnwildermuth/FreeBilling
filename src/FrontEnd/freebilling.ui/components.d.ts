@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     CustomerAddress: typeof import('./src/components/CustomerAddress.vue')['default']
+    FormError: typeof import('./src/components/FormError.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconBack: typeof import('./src/components/IconBack.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
