@@ -13,11 +13,24 @@ export interface Address {
 
 export const AddressSchema = z.object({
   id: z.number(),
-  addressLine1: z.nullable(z.string()),
+  addressLine1: z.string().min(5, "Required to be at least five characters."),
   addressLine2: z.nullable(z.string()),
   addressLine3: z.nullable(z.string()),
-  city: z.nullable(z.string()),
-  stateProvince: z.nullable(z.string()),
-  postalCode: z.nullable(z.string()),
+  city: z.string().min(1, "Required"),
+  stateProvince: z.string().min(1, "Required"),
+  postalCode: z.string().min(1, "Required"),
   country: z.nullable(z.string())
 });
+
+export function generateEmptyAddress() {
+  return {
+    id: 0,
+    addressLine1: "",
+    addressLine2: "",
+    addressLine3: "",
+    city: "",
+    stateProvince: "",
+    postalCode: "",
+    country: ""
+  }
+}

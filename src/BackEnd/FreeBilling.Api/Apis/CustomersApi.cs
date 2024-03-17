@@ -34,19 +34,19 @@ public class CustomersApi : IApi
       .Produces(200);
   }
 
-  public async Task<IResult> GetCustomers(IBillingRepository repo)
+  public static async Task<IResult> GetCustomers(IBillingRepository repo)
   {
     return Results.Ok(await repo.GetAllCustomers());
   }
 
-  public async Task<IResult> GetCustomer(IBillingRepository repo, int id)
+  public static async Task<IResult> GetCustomer(IBillingRepository repo, int id)
   {
     var customer = await repo.GetCustomer(id);
     if (customer is null) return Results.NotFound("Customer Not Found");
     return Results.Ok(customer);
   }
 
-  private async Task<IResult> GetCustomerDetails(IBillingRepository repo, int id)
+  private static async Task<IResult> GetCustomerDetails(IBillingRepository repo, int id)
   {
     var customer = await repo.GetCustomerDetails(id);
     if (customer is null) return Results.NotFound("Customer Not Found");

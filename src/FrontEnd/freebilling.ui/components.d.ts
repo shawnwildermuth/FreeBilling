@@ -7,17 +7,22 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ConfirmationDialog: typeof import('./src/components/ConfirmationDialog.vue')['default']
     CustomerAddress: typeof import('./src/components/CustomerAddress.vue')['default']
     FormError: typeof import('./src/components/FormError.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconBack: typeof import('./src/components/IconBack.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
+    IconDelete: typeof import('./src/components/IconDelete.vue')['default']
+    IconDetails: typeof import('./src/components/IconDetails.vue')['default']
     IconDocumentation: typeof import('./src/components/icons/IconDocumentation.vue')['default']
     IconEcosystem: typeof import('./src/components/icons/IconEcosystem.vue')['default']
     IconEdit: typeof import('./src/components/IconEdit.vue')['default']
+    IconInfo: typeof import('./src/components/IconInfo.vue')['default']
     IconPlus: typeof import('./src/components/IconPlus.vue')['default']
     IconPost: typeof import('./src/components/IconPost.vue')['default']
     IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
+    IconTicket: typeof import('./src/components/IconTicket.vue')['default']
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

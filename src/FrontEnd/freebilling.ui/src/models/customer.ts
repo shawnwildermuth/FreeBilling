@@ -1,4 +1,4 @@
-import { type Address, AddressSchema } from "./Address.js";
+import { type Address, AddressSchema, generateEmptyAddress } from "./Address.js";
 import { z } from "zod";
 
 export interface Customer {
@@ -11,10 +11,20 @@ export interface Customer {
 
 export const CustomerSchema = z.object({
   id: z.number(),
-  companyName: z.string(),
+  companyName: z.string().min(1, "Required"),
   address: z.nullable(AddressSchema),
   contact: z.nullable(z.string()),
-  phoneNumbe: z.nullable(z.string())
+  phoneNumber: z.nullable(z.string())
 });
+
+export function generateEmptyCustomer() {
+  return {
+    id: 0,
+    companyName: "",
+    contact: "",
+    phoneNumber: "",
+    address: generateEmptyAddress()
+  } as Customer;
+}
 
 export type CustomerErrors = z.inferFormattedError<typeof CustomerSchema>;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Customer, CustomerSchema, type CustomerErrors } from '@/models/Customer';
+import { type Customer, CustomerSchema, type CustomerErrors, generateEmptyCustomer } from '@/models/Customer';
 import { useState } from '@/stores';
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -18,9 +18,7 @@ onMounted(async () => {
   if (route.params.id === "new") {
     // reset the object
     id = -1;
-    customer.value = {
-      address: {}
-    } as Customer;
+    customer.value = generateEmptyCustomer();
   } else {
     id = Number(route.params.id);
     const result = await state.getCustomer(id);
@@ -49,7 +47,16 @@ async function save() {
     // Store so we can show error
     errors.value = valid.error.format();
   } else {
+    if (id === -1) {
     // Save it
+    if (await state.saveCustomer(customer.value!)) {
+      router.back();
+    }
+  } else {
+    if (await state.updateCustomer(customer.value!)) {
+      router.back();
+    }
+   }
   }
 }
 </script>
@@ -89,7 +96,7 @@ async function save() {
         <input type="text" class="theInput"
           v-model="customer.address.addressLine3" />
       </label>
-      <div class="flex gap-1">
+      <div class="flex gap-1" v-if="customer.address">
         <label class="theLabel">
           <div class="label">City</div>
           <input type="text" placeholder="e.g. Anytown" class="theInput"
@@ -101,6 +108,7 @@ async function save() {
           <div class="label">State/Province</div>
           <select class="select select-bordered w-full"
             v-model="customer.address.stateProvince">
+            <option disabled selected value="">Select one...</option>
             <option v-for="s in stateList" :value="s.abbreviation">{{ s.name }}
             </option>
           </select>

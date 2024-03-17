@@ -45,6 +45,14 @@ public class BillingContext : DbContext
         Contact = "Mel Phillips",
         PhoneNumber = "561-555-1212",
         AddressId = 2,
+      },
+      new
+      {
+        Id = 3,
+        CompanyName = "Oliveoil Games",
+        Contact = "Mitch Heading",
+        PhoneNumber = "678-555-1212",
+        AddressId = 3,
       });
 
     bldr.Entity<Address>()
@@ -64,6 +72,16 @@ public class BillingContext : DbContext
         City = "Fort Lauderdale",
         StateProvince = "FL",
         PostalCode = "30033"
+      },
+      new
+      {
+        Id = 3,
+        AddressLine1 = "128 Peachtree St.",
+        AddressLine2 = "4th Floor",
+        AddressLine3 = "Attn: Accounting",
+        City = "Atlanta",
+        StateProvince = "GA",
+        PostalCode = "30303"
       });
 
     bldr.Entity<Project>()

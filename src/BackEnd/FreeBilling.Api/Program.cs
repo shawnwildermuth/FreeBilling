@@ -1,6 +1,7 @@
 using FluentValidation;
 using FreeBilling.Data;
 using FreeBilling.Services;
+using FreeBilling.Validators;
 using Microsoft.EntityFrameworkCore;
 using WilderMinds.MinimalApiDiscovery;
 
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // services
 builder.Services.AddTransient<IEmailService, FakeEmailService>();
-builder.Services.AddValidatorsFromAssemblyContaining<IValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CustomerValidator>();
 
 builder.Services.AddDbContext<BillingContext>(opt =>
 {
