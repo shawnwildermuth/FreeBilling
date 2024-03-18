@@ -25,7 +25,6 @@ function closeError() {
 
 <template>
   <div data-theme="night">
-    <button @click="state.error = 'testing'">Test</button>
     <div v-if="state.isBusy"
       class="absolute w-full h-screen z-50 flex justify-center items-center bg-gray-800/75">
       <span class="loading loading-ring loading-lg"></span>

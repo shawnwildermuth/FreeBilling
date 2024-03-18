@@ -27,8 +27,8 @@ function showModal() {
     <div class="modal-box">
       <h3>Are you sure?</h3>
       <div class="modal-action">
-        <button class="btn btn-info" @click="close(false)">No</button>
-        <button class="btn btn-success" focus @click="close(true)">Yes</button>
+        <button class="btn btn-info" @click="close(false)"><icon-delete /> No</button>
+        <button class="btn btn-success" focus @click="close(true)"><icon-check />Yes</button>
       </div>
     </div>
 
