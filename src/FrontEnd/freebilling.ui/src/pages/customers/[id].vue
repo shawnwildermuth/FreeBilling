@@ -1,18 +1,23 @@
 <script setup lang="ts">
 import type { CustomerDetails } from '@/models/CustomerDetails';
-import { useState } from '@/stores';
+import { useCustomerStore } from '@/stores/customerStore';
 import { onMounted, reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { money, shortDate } from "@/filters";
+import type { ProjectModel } from '@/models/ProjectModel';
 
 const router = useRouter();
 const route = useRoute();
-const state = useState();
+const store = useCustomerStore();
 const customer = ref<CustomerDetails>();
 
 onMounted(async () => {
-  customer.value = await state.getCustomerDetails(Number(route.params.id));
+  customer.value = await store.getCustomerDetails(Number(route.params.id));
 });
+
+function endProject(project: ProjectModel) {
+  // todo
+}
 
 </script>
 <template>
@@ -52,9 +57,9 @@ onMounted(async () => {
             <td>{{ money(p.projectTotal) }}</td>
             <td>
               <div class="join">
-                <button class="btn btn-sm btn-primary join-item"><icon-edit class="w-4 h-4" /> Edit</button>
-                <button class="btn btn-sm btn-secondary join-item"><icon-plus class="w-4 h-4"/> Ticket</button>
-                <button class="btn btn-sm btn-warning join-item"><icon-post class="w-4 h-4"/> End</button>
+                <router-link :to="`/projects/edit/${p.id}`" class="btn btn-xs btn-primary join-item"><icon-edit class="w-4 h-4" /> Edit</router-link>
+                <router-link :to="`/tickets/new?projectid=${p.id}`" class="btn btn-xs btn-secondary join-item"><icon-plus class="w-4 h-4"/> Ticket</router-link>
+                <button @click="endProject(p)" class="btn btn-xs btn-warning join-item"><icon-post class="w-4 h-4"/> End</button>
               </div>
 
             </td>
@@ -64,4 +69,4 @@ onMounted(async () => {
     </div>
   </div>
 </template>
-
+@/stores/customerStore

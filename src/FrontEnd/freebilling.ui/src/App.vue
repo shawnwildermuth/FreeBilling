@@ -1,31 +1,31 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import { useState } from './stores';
+import { useStore } from './stores/';
 import { watch } from 'vue';
 
-const state = useState();
+const store = useStore();
 let timeoutId = 0;
 
 // Clear after five seconds
-watch(() => state.error,
+watch(() => store.error,
   () => {
-    if (state.error) {
+    if (store.error) {
       timeoutId = setTimeout(() => {
-        state.error = "";
+        store.error = "";
       }, 5000)
     }
   })
 
 function closeError() {
   clearTimeout(timeoutId);
-  state.error = "";
+  store.error = "";
 }
 
 </script>
 
 <template>
   <div data-theme="night">
-    <div v-if="state.isBusy"
+    <div v-if="store.isBusy"
       class="absolute w-full h-screen z-50 flex justify-center items-center bg-gray-800/75">
       <span class="loading loading-ring loading-lg"></span>
     </div>
@@ -37,6 +37,7 @@ function closeError() {
         <ul class="menu text-lg">
           <li><router-link to="/">Home</router-link></li>
           <li><router-link to="/customers">Customers</router-link></li>
+          <li><router-link to="/tickets/edit/new">New Ticket</router-link></li>
           <li><router-link to="/reports">Reporting</router-link></li>
           <li><router-link to="/accounting">Accounting</router-link></li>
         </ul>
@@ -47,11 +48,11 @@ function closeError() {
           leave-active-class="duration-300 ease-in"
           leave-from-class="opacity-100" leave-to-class="transform opacity-0">
           <div role="alert" class="alert p-1 alert-warning shadow-sm"
-            v-if="state.error">
+            v-if="store.error">
             <icon-info />
             <div>
               <h3 class="font-bold">Error!</h3>
-              <div class="text-xs">{{ state.error }}</div>
+              <div class="text-xs">{{ store.error }}</div>
             </div>
             <div @click="closeError">
               <icon-delete />

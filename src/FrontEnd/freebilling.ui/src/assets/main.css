@@ -31,7 +31,13 @@
 
 @layer utilities {
   .theInput {
-    @apply input input-bordered w-full;
+    @apply input input-bordered w-full my-1 text-gray-200 text-lg focus:bg-slate-300 focus:text-black;
+  }
+  .theSelect {
+    @apply select select-bordered w-full my-1 text-gray-200 text-lg focus:bg-slate-300 focus:text-black;;
+  }
+  .theInput.error {
+    @apply border-warning;  
   }
   .theLabel {
     @apply form-control w-full;

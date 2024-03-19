@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useState } from "@/stores";
+import { useCustomerStore } from "@/stores/customerStore";
 import { onMounted, ref } from "vue";
-import ConfirmationDialog
- from "@/components/ConfirmationDialog.vue";
-const state = useState();
+import ConfirmationDialog from "@/components/ConfirmationDialog.vue";
 
+const customerStore = useCustomerStore();
 const confirmationDialog = ref<typeof ConfirmationDialog>();
-
 let tempId = 0;
 
 function checkDelete(id: number) {
@@ -16,12 +14,12 @@ function checkDelete(id: number) {
 
 async function finishDelete(confirmed: boolean) {
   if (confirmed) {
-    await state.deleteCustomer(tempId);
+    await customerStore.deleteCustomer(tempId);
   }
   tempId = 0;
 }
 
-onMounted(async () => await state.loadCustomers());
+onMounted(async () => await customerStore.loadCustomers());
 
 </script>
 
@@ -45,7 +43,7 @@ onMounted(async () => await state.loadCustomers());
           </tr>
         </thead>
         <tbody>
-          <tr class="hover:!bg-slate-800/75" v-for="c in state.customers" :key="c.id">
+          <tr class="hover:!bg-slate-800/75" v-for="c in customerStore.customers" :key="c.id">
             <td>{{ c.companyName }}</td>
             <td>{{ c.contact }}</td>
             <td class="text-blue-400"><a class=" hover:underline" :href="`tel:${c.phoneNumber}`">{{
@@ -55,11 +53,6 @@ onMounted(async () => await state.loadCustomers());
                 <router-link :to="'/customers/' + c.id" title="Details"
                   class="btn btn-xs btn-info join-item">
                   <icon-details /> Details
-                </router-link>
-                <router-link :to="'/customers/tickets/' + c.id"
-                  title="View Tickets"
-                  class="btn btn-xs btn-success join-item">
-                  <icon-ticket /> Tickets
                 </router-link>
                 <router-link :to="'/customers/editor/' + c.id" title="Edit"
                   class="btn btn-xs btn-primary join-item">
@@ -76,4 +69,4 @@ onMounted(async () => await state.loadCustomers());
       </table>
     </div>
   </div>
-</template>
+</template>@/stores/customerStore
