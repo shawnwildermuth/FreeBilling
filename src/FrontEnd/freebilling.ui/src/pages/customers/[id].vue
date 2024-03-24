@@ -26,7 +26,9 @@ function endProject(project: ProjectModel) {
       <button class="btn btn-sm btn-info"
         @click.prevent="router.back()"><icon-back /> Back</button>
       <div>
-        <router-link class="btn btn-sm btn-secondary"
+        <router-link class="btn btn-sm btn-info"
+          to="/customer/projects/edit/new?customerId={{ customer?.id }}"><icon-edit /> New Project</router-link>
+          <router-link class="btn btn-sm btn-secondary"
           to="/customer/edit/{{ customer?.id }}"><icon-edit /> Edit</router-link>
       </div>
     </div>

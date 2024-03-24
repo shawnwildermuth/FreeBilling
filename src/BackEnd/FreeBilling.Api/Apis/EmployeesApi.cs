@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WilderMinds.MinimalApiDiscovery;
 
-namespace FreeBilling.Controllers;
+namespace FreeBilling.Apis;
 
 public class EmployeesApi : IApi
 {

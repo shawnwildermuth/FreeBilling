@@ -5,7 +5,7 @@ using Mapster;
 using WilderMinds.MinimalApiDiscovery;
 using WilderMinds.MinimalApis.FluentValidation;
 
-namespace FreeBilling.Controllers;
+namespace FreeBilling.Apis;
 
 public class WorkTicketsApi : IApi
 {

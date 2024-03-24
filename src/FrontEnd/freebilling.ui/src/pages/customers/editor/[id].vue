@@ -65,7 +65,7 @@ async function save() {
   }
 }
 
-function handleBlur() {
+function handleFocusOut() {
   if (dirty.value) validate();
 }
 
@@ -74,29 +74,26 @@ function handleBlur() {
 <template>
   <div class="w-[48rem]">
     <h3>Customer</h3>
-    <div v-if="customer" class="p-1 flex flex-col gap-2">
+    <div v-if="customer" class="p-1 flex flex-col gap-2"
+      @focusout="handleFocusOut">
       <label class="theLabel">
         <div class="label">Company Name</div>
         <input type="text" placeholder="e.g. Acme Inc." class="theInput"
-          @blur="handleBlur"  
           :class="{ error: errors?.companyName }"
-        v-model="customer.companyName" />
+          v-model="customer.companyName" />
         <form-error :errors="errors?.companyName" />
       </label>
       <label class="theLabel">
         <div class="label">Contact Name</div>
         <input type="text" placeholder="e.g. Bob Smith" class="theInput"
-        @blur="handleBlur"  
-        :class="{ error: errors?.contact }"
-          v-model="customer.contact" />
+          :class="{ error: errors?.contact }" v-model="customer.contact" />
         <form-error :errors="errors?.contact" />
 
       </label>
       <label class="theLabel">
         <div class="label">Phone</div>
         <input type="text" placeholder="e.g. 404-555-1212" class="theInput"
-        @blur="handleBlur"  
-        :class="{ error: errors?.phoneNumber }"
+          :class="{ error: errors?.phoneNumber }"
           v-model="customer.phoneNumber" />
         <form-error :errors="errors?.phoneNumber" />
 
@@ -104,8 +101,7 @@ function handleBlur() {
       <label class="theLabel" v-if="customer.address">
         <div class="label">Address</div>
         <input type="text" placeholder="e.g. 123 Main St." class="theInput"
-        @blur="handleBlur"  
-        :class="{ error: errors?.address?.addressLine1 }"
+          :class="{ error: errors?.address?.addressLine1 }"
           v-model="customer.address.addressLine1" />
         <form-error :errors="errors?.address?.addressLine1" />
 
@@ -117,9 +113,7 @@ function handleBlur() {
       <div class="flex gap-1" v-if="customer.address">
         <label class="theLabel">
           <div class="label">City</div>
-          <input type="text" placeholder="e.g. Anytown" 
-            class="theInput"
-            @blur="handleBlur"  
+          <input type="text" placeholder="e.g. Anytown" class="theInput"
             :class="{ error: errors?.address?.city }"
             v-model="customer.address.city" />
           <form-error :errors="errors?.address?.city" />
@@ -128,8 +122,7 @@ function handleBlur() {
         <label class="theLabel">
           <div class="label">State/Province</div>
           <select class="theSelect"
-          @blur="handleBlur"  
-          :class="{ error: errors?.address?.stateProvince }"
+            :class="{ error: errors?.address?.stateProvince }"
             v-model="customer.address.stateProvince">
             <option disabled selected value="">Select one...</option>
             <option v-for="s in stateList" :value="s.abbreviation">{{ s.name }}
@@ -141,8 +134,7 @@ function handleBlur() {
         <label class="theLabel">
           <div class="label">Postal Code</div>
           <input type="text" placeholder="e.g. 30303" class="theInput"
-          @blur="handleBlur"  
-          :class="{ error: errors?.address?.postalCode }"
+            :class="{ error: errors?.address?.postalCode }"
             v-model="customer.address.postalCode" />
           <form-error :errors="errors?.address?.postalCode" />
 
@@ -150,8 +142,7 @@ function handleBlur() {
         <label class="theLabel">
           <div class="label">Country</div>
           <input type="text" placeholder="e.g. USA" class="theInput"
-          @blur="handleBlur"  
-          :class="{ error: errors?.address?.country }"
+            :class="{ error: errors?.address?.country }"
             v-model="customer.address.country" />
           <form-error :errors="errors?.address?.country" />
 

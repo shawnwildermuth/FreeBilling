@@ -4,7 +4,7 @@ using Mapster;
 using WilderMinds.MinimalApiDiscovery;
 using WilderMinds.MinimalApis.FluentValidation;
 
-namespace FreeBilling.Controllers;
+namespace FreeBilling.Apis;
 
 public class CustomersApi : IApi
 {
@@ -55,7 +55,7 @@ public class CustomersApi : IApi
 
 
 
-  public async Task<IResult> Post(IBillingRepository repo, 
+  public async Task<IResult> Post(IBillingRepository repo,
     ILogger<CustomersApi> logger,
     Customer model)
   {
@@ -76,7 +76,7 @@ public class CustomersApi : IApi
 
   public async Task<IResult> Put(IBillingRepository repo,
     ILogger<CustomersApi> logger,
-    int id, 
+    int id,
     Customer model)
   {
     try
@@ -87,10 +87,8 @@ public class CustomersApi : IApi
       // Copy new values to connected entity
       model.Adapt(oldCustomer);
 
-      if (await repo.SaveChanges())
-      {
-        return Results.Ok(oldCustomer);
-      }
+      await repo.SaveChanges(); // Allow for no changes to be successful
+      return Results.Ok(oldCustomer);
     }
     catch (Exception ex)
     {
@@ -101,7 +99,7 @@ public class CustomersApi : IApi
   }
 
   public async Task<IResult> Delete(IBillingRepository repo,
-    ILogger<CustomersApi> logger, 
+    ILogger<CustomersApi> logger,
     int id)
   {
     try
