@@ -8,7 +8,6 @@ namespace FreeBilling.Apis;
 
 public class CustomersApi : IApi
 {
-
   public void Register(IEndpointRouteBuilder app)
   {
     var group = app.MapGroup("/api/customers");
