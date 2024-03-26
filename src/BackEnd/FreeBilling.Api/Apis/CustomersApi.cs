@@ -55,7 +55,7 @@ public class CustomersApi : IApi
 
 
 
-  public async Task<IResult> Post(IBillingRepository repo,
+  public static async Task<IResult> Post(IBillingRepository repo,
     ILogger<CustomersApi> logger,
     Customer model)
   {
@@ -74,7 +74,7 @@ public class CustomersApi : IApi
     return Results.BadRequest("Failed to add Customer");
   }
 
-  public async Task<IResult> Put(IBillingRepository repo,
+  public static async Task<IResult> Put(IBillingRepository repo,
     ILogger<CustomersApi> logger,
     int id,
     Customer model)
@@ -98,7 +98,7 @@ public class CustomersApi : IApi
 
   }
 
-  public async Task<IResult> Delete(IBillingRepository repo,
+  public static async Task<IResult> Delete(IBillingRepository repo,
     ILogger<CustomersApi> logger,
     int id)
   {

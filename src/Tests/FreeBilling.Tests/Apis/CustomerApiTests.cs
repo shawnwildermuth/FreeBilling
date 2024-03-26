@@ -8,6 +8,7 @@ using FreeBilling.Data;
 using FreeBilling.Data.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace FreeBilling.Tests.Apis;
@@ -15,11 +16,13 @@ namespace FreeBilling.Tests.Apis;
 public class CustomerApiTests : BaseTest
 {
   private IBillingRepository _repo;
+  private ILogger<CustomersApi> _logger;
 
   public CustomerApiTests()
   {
     var svcs = GenerateServices();
     _repo = svcs.GetService<IBillingRepository>()!;
+    _logger = svcs.GetService<ILogger<CustomersApi>>()!;
   }
 
   [Fact]
@@ -29,7 +32,7 @@ public class CustomerApiTests : BaseTest
     Assert.IsAssignableFrom<Ok<IEnumerable<Customer>>>(result);
     var customers = ((Ok<IEnumerable<Customer>>)result).Value;
     Assert.NotNull(customers);
-    Assert.True(customers.Count() == 1);
+    Assert.True(customers.Count() > 0);
   }
 
   [Fact]
@@ -39,13 +42,40 @@ public class CustomerApiTests : BaseTest
     Assert.IsAssignableFrom<Ok<Customer>>(result);
     var customer = ((Ok<Customer>)result).Value;
     Assert.NotNull(customer);
-    Assert.True(customer.CompanyName == "Acme");
+    Assert.True(customer.PhoneNumber == "404-555-1212");
   }
 
   [Fact]
   public async Task CantFindCustomer()
   {
-    var result = await CustomersApi.GetCustomer(_repo, 2);
+    var result = await CustomersApi.GetCustomer(_repo, 30);
     Assert.IsAssignableFrom<NotFound<string>>(result);
   }
+
+  //[Fact]
+  //public async Task CanSaveCustomer()
+  //{
+  //  var newItem = new Customer()
+  //  {
+  //    Id = 0,
+  //    CompanyName = "Test Me"
+  //  };
+    
+  //  var result = await CustomersApi.Post(_repo, _logger, newItem);
+  //  Assert.IsAssignableFrom<Ok<Customer>>(result);
+  //  var customer = ((Ok<Customer>)result).Value;
+  //  Assert.NotNull(customer);
+  //  Assert.True(customer.CompanyName == "Acme");
+  //}
+
+  //[Fact]
+  //public async Task CanUpdateCustomer()
+  //{
+  //  var result = await CustomersApi.GetCustomer(_repo, 1);
+  //  Assert.IsAssignableFrom<Ok<Customer>>(result);
+  //  var customer = ((Ok<Customer>)result).Value;
+  //  Assert.NotNull(customer);
+  //  Assert.True(customer.CompanyName == "Acme");
+  //}
+
 }

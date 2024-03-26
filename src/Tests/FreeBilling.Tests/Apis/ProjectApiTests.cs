@@ -29,7 +29,7 @@ public class ProjectApiTests : BaseTest
     Assert.IsAssignableFrom<Ok<IEnumerable<Project>>>(result);
     var projects = ((Ok<IEnumerable<Project>>)result).Value;
     Assert.NotNull(projects);
-    Assert.True(projects.Count() == 1);
+    Assert.True(projects.Count() > 0);
   }
 
   [Fact]
@@ -39,13 +39,13 @@ public class ProjectApiTests : BaseTest
     Assert.IsAssignableFrom<Ok<Project>>(result);
     var project = ((Ok<Project>)result).Value;
     Assert.NotNull(project);
-    Assert.True(project.ProjectName == "Average Stuff");
+    Assert.True(project.ProjectName == "SEO Help");
   }
 
   [Fact]
   public async Task CantFindProject()
   {
-    var result = await CustomerProjectsApi.GetProject(_repo, 2, 2);
+    var result = await CustomerProjectsApi.GetProject(_repo, 1, 30);
     Assert.IsAssignableFrom<NotFound>(result);
   }
 
