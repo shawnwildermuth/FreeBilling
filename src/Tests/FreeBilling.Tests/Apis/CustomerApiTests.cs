@@ -52,30 +52,57 @@ public class CustomerApiTests : BaseTest
     Assert.IsAssignableFrom<NotFound<string>>(result);
   }
 
-  //[Fact]
-  //public async Task CanSaveCustomer()
-  //{
-  //  var newItem = new Customer()
-  //  {
-  //    Id = 0,
-  //    CompanyName = "Test Me"
-  //  };
-    
-  //  var result = await CustomersApi.Post(_repo, _logger, newItem);
-  //  Assert.IsAssignableFrom<Ok<Customer>>(result);
-  //  var customer = ((Ok<Customer>)result).Value;
-  //  Assert.NotNull(customer);
-  //  Assert.True(customer.CompanyName == "Acme");
-  //}
+  [Fact]
+  public async Task CanSaveCustomer()
+  {
+    var newItem = new Customer()
+    {
+      Id = 0,
+      CompanyName = "Test Me"
+    };
 
-  //[Fact]
-  //public async Task CanUpdateCustomer()
-  //{
-  //  var result = await CustomersApi.GetCustomer(_repo, 1);
-  //  Assert.IsAssignableFrom<Ok<Customer>>(result);
-  //  var customer = ((Ok<Customer>)result).Value;
-  //  Assert.NotNull(customer);
-  //  Assert.True(customer.CompanyName == "Acme");
-  //}
+    var result = await CustomersApi.Post(_repo, _logger, newItem);
+    Assert.IsAssignableFrom<Created<Customer>>(result);
+    var customer = ((Created<Customer>)result).Value;
+    Assert.NotNull(customer);
+    var found = await CustomersApi.GetCustomer(_repo, customer.Id);
+    Assert.NotNull(found);
+    Assert.True(customer.CompanyName == newItem.CompanyName);
+  }
 
+  [Fact]
+  public async Task CanUpdateCustomer()
+  {
+    var result = await CustomersApi.GetCustomer(_repo, 3);
+    Assert.IsAssignableFrom<Ok<Customer>>(result);
+    var customer = ((Ok<Customer>)result).Value;
+    Assert.NotNull(customer);
+    var originalName = customer.CompanyName;
+    customer.CompanyName += "-";
+    var updated = await CustomersApi.Put(_repo, _logger, customer.Id, customer);
+    Assert.IsAssignableFrom<Ok<Customer>>(result);
+    var found = await CustomersApi.GetCustomer(_repo, customer.Id);
+    Assert.NotNull(found);
+    Assert.True(customer.CompanyName == originalName + "-");
+  }
+
+
+  [Fact]
+  public async Task CanDeleteCustomer()
+  {
+    var newItem = new Customer()
+    {
+      Id = 0,
+      CompanyName = "Test Me"
+    };
+
+    var created = await CustomersApi.Post(_repo, _logger, newItem);
+    Assert.IsAssignableFrom<Created<Customer>>(created);
+    var customer = ((Created<Customer>)created).Value;
+    Assert.NotNull(customer);
+    var result = await CustomersApi.Delete(_repo, _logger, customer.Id);
+    Assert.IsAssignableFrom<Ok>(result);
+    var found = await CustomersApi.GetCustomer(_repo, customer.Id);
+    Assert.IsAssignableFrom<NotFound<string>>(found);
+  }
 }
