@@ -43,14 +43,17 @@ public class CustomerProjectsApi : IApi
 
   public static async Task<IResult> Post(IBillingRepository repo,
                                   ILogger<CustomerProjectsApi> logger,
+                                  int custId, 
                                   Project model)
   {
     try
     {
+      if (model.CustomerId != custId) model.CustomerId = custId;
+
       repo.Add(model);
       if (await repo.SaveChanges())
       {
-        return Results.Created($"/api/customers/{model.CustomerId}/projects/{model.Id}", model);
+        return Results.Created($"/api/customers/{custId}/projects/{model.Id}", model);
       }
     }
     catch (Exception ex)
@@ -62,6 +65,7 @@ public class CustomerProjectsApi : IApi
 
   public static async Task<IResult> Put(IBillingRepository repo,
     ILogger<CustomerProjectsApi> logger,
+    int custId, 
     int id,
     Project model)
   {
@@ -69,6 +73,7 @@ public class CustomerProjectsApi : IApi
     {
       var oldProject = await repo.GetProject(id);
       if (oldProject is null) return Results.NotFound("Project Not Found");
+      if (oldProject.CustomerId != custId) return Results.BadRequest("Incorrect Customer Id for Project");
 
       // Copy new values to connected entity
       model.Adapt(oldProject);
@@ -86,12 +91,14 @@ public class CustomerProjectsApi : IApi
 
   public static async Task<IResult> Delete(IBillingRepository repo,
                                     ILogger<CustomerProjectsApi> logger,
+                                    int custId,
                                     int id)
   {
     try
     {
       var oldProject = await repo.GetProject(id);
       if (oldProject is null) return Results.NotFound("Project Not Found");
+      if (oldProject.CustomerId != custId) return Results.BadRequest("Incorrect Customer Id for Project");
 
       repo.Remove(oldProject);
       if (await repo.SaveChanges())

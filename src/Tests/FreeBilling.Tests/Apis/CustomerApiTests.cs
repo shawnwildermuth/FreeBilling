@@ -66,8 +66,10 @@ public class CustomerApiTests : BaseTest
     var customer = ((Created<Customer>)result).Value;
     Assert.NotNull(customer);
     var found = await CustomersApi.GetCustomer(_repo, customer.Id);
-    Assert.NotNull(found);
-    Assert.True(customer.CompanyName == newItem.CompanyName);
+    Assert.IsAssignableFrom<Ok<Customer>>(found);
+    var existing = ((Ok<Customer>)found).Value;
+    Assert.NotNull(existing);
+    Assert.True(existing.CompanyName == newItem.CompanyName);
   }
 
   [Fact]
